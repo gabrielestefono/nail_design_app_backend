@@ -21,6 +21,8 @@ import com.nail.design.users.repository.UserRepository;
 import com.nail.design.users.services.JwtService;
 
 import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 @RequestMapping("/user")
@@ -138,6 +140,11 @@ public class UserController {
             ex.printStackTrace();
         }
         return ResponseEntity.badRequest().body("Usuário ou senha incorretos!");
+    }
+
+    @GetMapping("/login")
+    public String getMethodName() {
+        return "Funcionando";
     }
 
 }

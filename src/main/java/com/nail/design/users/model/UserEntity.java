@@ -1,12 +1,16 @@
 package com.nail.design.users.model;
 
 import java.util.Date;
+import java.util.Set;
+
+import com.nail.design.servicos.model.Servico;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -15,7 +19,7 @@ public class UserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     private String firstName;
 
@@ -34,15 +38,18 @@ public class UserEntity {
 
     private Date createdAt;
 
+    @OneToMany(mappedBy = "user")
+    private Set<Servico> servicos;
+
     public UserEntity() {
         // Empty Constructor
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -110,10 +117,16 @@ public class UserEntity {
         this.createdAt = createdAt;
     }
 
+    public Set<Servico> getServicos() {
+        return servicos;
+    }
+
+    public void setServicos(Set<Servico> servicos) {
+        this.servicos = servicos;
+    }
+
     @Override
     public String toString() {
-        return "UserEntity [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
-                + ", phone=" + phone + ", address=" + address + ", password=" + password + ", role=" + role
-                + ", createdAt=" + createdAt + "]";
+        return "firstName=" + firstName + ", lastName=" + lastName + ", email=" + email;
     }
 }
